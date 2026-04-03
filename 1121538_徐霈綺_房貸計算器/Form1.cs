@@ -15,6 +15,7 @@ namespace _1121538_徐霈綺_房貸計算器
         public Form1()
         {
             InitializeComponent();
+            cmbDownPaymentType.SelectedIndex = 0;
         }
 
         private void BtnCalculate_Click(object sender, EventArgs e)
