@@ -21,7 +21,7 @@ namespace _1121538_徐霈綺_房貸計算器
         {
             try
             {
-                double totalHousePrice = double.Parse(txtTotalHousePrice.Text);
+                double totalHousePrice = double.Parse(txtTotalHousePrice.Text) * 10000;
                 double downPaymentVal = double.Parse(txtDownPayment.Text);
                 double annualRate = double.Parse(txtAnnualInterestRate.Text);
                 int loanTermYears = int.Parse(txtLoanTerm.Text);

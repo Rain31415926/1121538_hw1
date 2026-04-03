@@ -57,7 +57,7 @@
             this.lblTotalHousePrice.Name = "lblTotalHousePrice";
             this.lblTotalHousePrice.Size = new System.Drawing.Size(120, 15);
             this.lblTotalHousePrice.TabIndex = 0;
-            this.lblTotalHousePrice.Text = "房屋總價 (元):";
+            this.lblTotalHousePrice.Text = "房屋總價 (萬元):";
 
             // txtTotalHousePrice
             this.txtTotalHousePrice.Location = new System.Drawing.Point(180, 27);
