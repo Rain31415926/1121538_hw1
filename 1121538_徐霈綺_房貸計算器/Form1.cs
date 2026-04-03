@@ -16,5 +16,97 @@ namespace _1121538_徐霈綺_房貸計算器
         {
             InitializeComponent();
         }
+
+        private void BtnCalculate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double totalHousePrice = double.Parse(txtTotalHousePrice.Text);
+                double downPaymentVal = double.Parse(txtDownPayment.Text);
+                double annualRate = double.Parse(txtAnnualInterestRate.Text);
+                int loanTermYears = int.Parse(txtLoanTerm.Text);
+                
+                int gracePeriodYears = 0;
+                if (!string.IsNullOrWhiteSpace(txtGracePeriod.Text))
+                {
+                    gracePeriodYears = int.Parse(txtGracePeriod.Text);
+                }
+
+                double downPayment = 0;
+                if (cmbDownPaymentType.SelectedIndex == 0) // Percentage
+                {
+                    downPayment = totalHousePrice * (downPaymentVal / 100.0);
+                }
+                else // Amount
+                {
+                    downPayment = downPaymentVal;
+                }
+
+                double principal = totalHousePrice - downPayment;
+                if (principal <= 0)
+                {
+                    MessageBox.Show("自備款大於或等於房屋總價，無需貸款。");
+                    return;
+                }
+
+                if (gracePeriodYears >= loanTermYears)
+                {
+                    MessageBox.Show("寬限期必須小於貸款年限。");
+                    return;
+                }
+
+                int totalMonths = loanTermYears * 12;
+                int graceMonths = gracePeriodYears * 12;
+                int amortMonths = totalMonths - graceMonths;
+
+                double monthlyRate = annualRate / 100.0 / 12.0;
+
+                double graceMonthlyPayment = 0;
+                double amortMonthlyPayment = 0;
+                
+                if (monthlyRate > 0)
+                {
+                    graceMonthlyPayment = principal * monthlyRate;
+                    double ratePow = Math.Pow(1 + monthlyRate, amortMonths);
+                    amortMonthlyPayment = principal * (monthlyRate * ratePow) / (ratePow - 1);
+                }
+                else
+                {
+                    graceMonthlyPayment = 0;
+                    amortMonthlyPayment = principal / amortMonths;
+                }
+
+                double totalInterest = 0;
+                double totalRepayment = 0;
+                double firstMonthInterest = 0;
+                double firstMonthPrincipal = 0;
+
+                if (graceMonths > 0)
+                {
+                    firstMonthInterest = principal * monthlyRate;
+                    firstMonthPrincipal = 0;
+                    totalInterest = (graceMonthlyPayment * graceMonths) + (amortMonthlyPayment * amortMonths - principal);
+                    lblMonthlyPayment.Text = $"每月應繳金額: 寬限期內 {graceMonthlyPayment:N2} 元 / 寬限期後 {amortMonthlyPayment:N2} 元";
+                }
+                else
+                {
+                    firstMonthInterest = principal * monthlyRate;
+                    firstMonthPrincipal = amortMonthlyPayment - firstMonthInterest;
+                    totalInterest = (amortMonthlyPayment * totalMonths) - principal;
+                    lblMonthlyPayment.Text = $"每月應繳金額: {amortMonthlyPayment:N2} 元";
+                }
+
+                totalRepayment = principal + totalInterest;
+
+                lblTotalLoanAmount.Text = $"貸款總金額: {principal:N2} 元";
+                lblFirstMonthDetails.Text = $"首期利息: {firstMonthInterest:N2} 元 / 首期本金: {firstMonthPrincipal:N2} 元";
+                lblTotalInterest.Text = $"總利息支出: {totalInterest:N2} 元";
+                lblTotalRepayment.Text = $"總還款金額: {totalRepayment:N2} 元";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("請輸入正確的數值格式。\n詳細錯誤: " + ex.Message);
+            }
+        }
     }
 }
