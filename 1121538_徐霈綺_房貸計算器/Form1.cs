@@ -138,5 +138,17 @@ namespace _1121538_徐霈綺_房貸計算器
             lblTotalInterest.Text = $"總利息支出: {totalInterest:N2} 元";
             lblTotalRepayment.Text = $"總還款金額: {totalRepayment:N2} 元";
         }
+
+        private void BtnHelp_Click(object sender, EventArgs e)
+        {
+            string helpMessage = "【各項名詞說明】\n\n" +
+                                 "房屋總價: 欲購買房屋的總價格。\n" +
+                                 "自備款比例/金額: 購屋時自己準備的付款金額，可依金額或佔總價的百分比輸入。\n" +
+                                 "貸款年利率: 銀行提供的貸款年利率。\n" +
+                                 "貸款年限: 預計還款的總年數。\n" +
+                                 "寬限期: 在此期間內只需繳交利息，不需攤還本金。設定寬限期會導致寬限期後每月的還款金額增加。\n" +
+                                 "貸款總金額: 房屋總價扣除自備款後的實際貸款金額。";
+            MessageBox.Show(helpMessage, "註解", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

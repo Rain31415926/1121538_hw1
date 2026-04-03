@@ -40,6 +40,7 @@
             this.lblGracePeriod = new System.Windows.Forms.Label();
             this.txtGracePeriod = new System.Windows.Forms.TextBox();
             this.btnCalculate = new System.Windows.Forms.Button();
+            this.btnHelp = new System.Windows.Forms.Button();
             
             this.groupBoxResult = new System.Windows.Forms.GroupBox();
             this.lblTotalLoanAmount = new System.Windows.Forms.Label();
@@ -144,6 +145,15 @@
             this.btnCalculate.UseVisualStyleBackColor = true;
             this.btnCalculate.Click += new System.EventHandler(this.BtnCalculate_Click);
 
+            // btnHelp
+            this.btnHelp.Location = new System.Drawing.Point(340, 230);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(90, 40);
+            this.btnHelp.TabIndex = 13;
+            this.btnHelp.Text = "註解(&H)";
+            this.btnHelp.UseVisualStyleBackColor = true;
+            this.btnHelp.Click += new System.EventHandler(this.BtnHelp_Click);
+
             // groupBoxResult
             this.groupBoxResult.Controls.Add(this.lblTotalLoanAmount);
             this.groupBoxResult.Controls.Add(this.lblMonthlyPayment);
@@ -202,6 +212,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(530, 560);
+            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.groupBoxResult);
             this.Controls.Add(this.btnCalculate);
             this.Controls.Add(this.txtGracePeriod);
@@ -244,6 +255,7 @@
         private System.Windows.Forms.Label lblFirstMonthDetails;
         private System.Windows.Forms.Label lblTotalInterest;
         private System.Windows.Forms.Label lblTotalRepayment;
+        private System.Windows.Forms.Button btnHelp;
     }
 }
 
