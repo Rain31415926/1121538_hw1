@@ -16,6 +16,7 @@ namespace _1121538_徐霈綺_房貸計算器
         {
             InitializeComponent();
             cmbDownPaymentType.SelectedIndex = 0;
+            cmbCurrency.SelectedIndex = 0; // 預設新台幣
         }
 
         private void BtnCalculate_Click(object sender, EventArgs e)
@@ -117,27 +118,29 @@ namespace _1121538_徐霈綺_房貸計算器
             double firstMonthInterest = 0;
             double firstMonthPrincipal = 0;
 
+            string currencyStr = cmbCurrency.Text;
+
             if (graceMonths > 0)
             {
                 firstMonthInterest = principal * monthlyRate;
                 firstMonthPrincipal = 0;
                 totalInterest = (graceMonthlyPayment * graceMonths) + (amortMonthlyPayment * amortMonths - principal);
-                lblMonthlyPayment.Text = $"每月應繳金額: 寬限期內 {graceMonthlyPayment:N2} 元 / 寬限期後 {amortMonthlyPayment:N2} 元";
+                lblMonthlyPayment.Text = $"每月應繳金額: 寬限期內 {graceMonthlyPayment:N2} {currencyStr} / 寬限期後 {amortMonthlyPayment:N2} {currencyStr}";
             }
             else
             {
                 firstMonthInterest = principal * monthlyRate;
                 firstMonthPrincipal = amortMonthlyPayment - firstMonthInterest;
                 totalInterest = (amortMonthlyPayment * totalMonths) - principal;
-                lblMonthlyPayment.Text = $"每月應繳金額: {amortMonthlyPayment:N2} 元";
+                lblMonthlyPayment.Text = $"每月應繳金額: {amortMonthlyPayment:N2} {currencyStr}";
             }
 
             totalRepayment = principal + totalInterest;
 
-            lblTotalLoanAmount.Text = $"貸款總金額: {principal:N2} 元";
-            lblFirstMonthDetails.Text = $"首期利息: {firstMonthInterest:N2} 元 / 首期本金: {firstMonthPrincipal:N2} 元";
-            lblTotalInterest.Text = $"總利息支出: {totalInterest:N2} 元";
-            lblTotalRepayment.Text = $"總還款金額: {totalRepayment:N2} 元";
+            lblTotalLoanAmount.Text = $"貸款總金額: {principal:N2} {currencyStr}";
+            lblFirstMonthDetails.Text = $"首期利息: {firstMonthInterest:N2} {currencyStr} / 首期本金: {firstMonthPrincipal:N2} {currencyStr}";
+            lblTotalInterest.Text = $"總利息支出: {totalInterest:N2} {currencyStr}";
+            lblTotalRepayment.Text = $"總還款金額: {totalRepayment:N2} {currencyStr}";
 
             // 加入至歷史紀錄
             var record = new CalculationRecord
@@ -145,6 +148,7 @@ namespace _1121538_徐霈綺_房貸計算器
                 TotalHousePrice = _totalHousePriceRaw,
                 DownPaymentType = cmbDownPaymentType.SelectedIndex,
                 DownPayment = downPaymentVal,
+                Currency = currencyStr,
                 AnnualRate = annualRate,
                 LoanTerm = loanTermYears,
                 GracePeriod = gracePeriodYears
@@ -158,6 +162,7 @@ namespace _1121538_徐霈綺_房貸計算器
             {
                 txtTotalHousePrice.Text = record.TotalHousePrice.ToString();
                 cmbDownPaymentType.SelectedIndex = record.DownPaymentType;
+                cmbCurrency.Text = record.Currency;
                 txtDownPayment.Text = record.DownPayment.ToString();
                 txtAnnualInterestRate.Text = record.AnnualRate.ToString();
                 txtLoanTerm.Text = record.LoanTerm.ToString();
@@ -185,6 +190,7 @@ namespace _1121538_徐霈綺_房貸計算器
         {
             txtTotalHousePrice.Text = "";
             cmbDownPaymentType.SelectedIndex = 0;
+            cmbCurrency.SelectedIndex = 0;
             txtDownPayment.Text = "20";
             txtAnnualInterestRate.Text = "2.15";
             txtLoanTerm.Text = "30";
@@ -202,6 +208,7 @@ namespace _1121538_徐霈綺_房貸計算器
             public double TotalHousePrice { get; set; }
             public int DownPaymentType { get; set; }
             public double DownPayment { get; set; }
+            public string Currency { get; set; }
             public double AnnualRate { get; set; }
             public int LoanTerm { get; set; }
             public int GracePeriod { get; set; }
@@ -209,7 +216,7 @@ namespace _1121538_徐霈綺_房貸計算器
             public override string ToString()
             {
                 string typeStr = DownPaymentType == 0 ? "%" : "元";
-                return $"總價:{TotalHousePrice}萬, 自備:{DownPayment}{typeStr}, 利率:{AnnualRate}%, {LoanTerm}年";
+                return $"總價:{TotalHousePrice}萬, 幣值:{Currency}, 自備:{DownPayment}{typeStr}, 利率:{AnnualRate}%, {LoanTerm}年";
             }
         }
     }

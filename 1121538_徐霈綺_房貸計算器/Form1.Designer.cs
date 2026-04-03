@@ -30,6 +30,8 @@
         {
             this.lblTotalHousePrice = new System.Windows.Forms.Label();
             this.txtTotalHousePrice = new System.Windows.Forms.TextBox();
+            this.lblCurrency = new System.Windows.Forms.Label();
+            this.cmbCurrency = new System.Windows.Forms.ComboBox();
             this.lblDownPaymentType = new System.Windows.Forms.Label();
             this.cmbDownPaymentType = new System.Windows.Forms.ComboBox();
             this.txtDownPayment = new System.Windows.Forms.TextBox();
@@ -65,10 +67,34 @@
             // 
             // txtTotalHousePrice
             // 
-            this.txtTotalHousePrice.Location = new System.Drawing.Point(180, 27);
+            this.txtTotalHousePrice.Location = new System.Drawing.Point(179, 27);
             this.txtTotalHousePrice.Name = "txtTotalHousePrice";
             this.txtTotalHousePrice.Size = new System.Drawing.Size(150, 25);
             this.txtTotalHousePrice.TabIndex = 1;
+            // 
+            // lblCurrency
+            // 
+            this.lblCurrency.AutoSize = true;
+            this.lblCurrency.Location = new System.Drawing.Point(340, 30);
+            this.lblCurrency.Name = "lblCurrency";
+            this.lblCurrency.Size = new System.Drawing.Size(41, 15);
+            this.lblCurrency.TabIndex = 18;
+            this.lblCurrency.Text = "幣值:";
+            // 
+            // cmbCurrency
+            // 
+            this.cmbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCurrency.FormattingEnabled = true;
+            this.cmbCurrency.Items.AddRange(new object[] {
+            "新台幣 (TWD)",
+            "美元 (USD)",
+            "日圓 (JPY)",
+            "歐元 (EUR)",
+            "人民幣 (CNY)"});
+            this.cmbCurrency.Location = new System.Drawing.Point(391, 27);
+            this.cmbCurrency.Name = "cmbCurrency";
+            this.cmbCurrency.Size = new System.Drawing.Size(90, 23);
+            this.cmbCurrency.TabIndex = 19;
             // 
             // lblDownPaymentType
             // 
@@ -86,7 +112,7 @@
             this.cmbDownPaymentType.Items.AddRange(new object[] {
             "比例 (%)",
             "金額 (元)"});
-            this.cmbDownPaymentType.Location = new System.Drawing.Point(180, 67);
+            this.cmbDownPaymentType.Location = new System.Drawing.Point(179, 67);
             this.cmbDownPaymentType.Name = "cmbDownPaymentType";
             this.cmbDownPaymentType.Size = new System.Drawing.Size(90, 23);
             this.cmbDownPaymentType.TabIndex = 3;
@@ -110,7 +136,7 @@
             // 
             // txtAnnualInterestRate
             // 
-            this.txtAnnualInterestRate.Location = new System.Drawing.Point(180, 107);
+            this.txtAnnualInterestRate.Location = new System.Drawing.Point(179, 107);
             this.txtAnnualInterestRate.Name = "txtAnnualInterestRate";
             this.txtAnnualInterestRate.Size = new System.Drawing.Size(150, 25);
             this.txtAnnualInterestRate.TabIndex = 6;
@@ -127,7 +153,7 @@
             // 
             // txtLoanTerm
             // 
-            this.txtLoanTerm.Location = new System.Drawing.Point(180, 147);
+            this.txtLoanTerm.Location = new System.Drawing.Point(179, 147);
             this.txtLoanTerm.Name = "txtLoanTerm";
             this.txtLoanTerm.Size = new System.Drawing.Size(150, 25);
             this.txtLoanTerm.TabIndex = 8;
@@ -144,7 +170,7 @@
             // 
             // txtGracePeriod
             // 
-            this.txtGracePeriod.Location = new System.Drawing.Point(180, 187);
+            this.txtGracePeriod.Location = new System.Drawing.Point(179, 187);
             this.txtGracePeriod.Name = "txtGracePeriod";
             this.txtGracePeriod.Size = new System.Drawing.Size(150, 25);
             this.txtGracePeriod.TabIndex = 10;
@@ -244,7 +270,7 @@
             this.lblHistory.AutoSize = true;
             this.lblHistory.Location = new System.Drawing.Point(520, 30);
             this.lblHistory.Name = "lblHistory";
-            this.lblHistory.Size = new System.Drawing.Size(67, 15);
+            this.lblHistory.Size = new System.Drawing.Size(71, 15);
             this.lblHistory.TabIndex = 15;
             this.lblHistory.Text = "歷史紀錄:";
             // 
@@ -274,6 +300,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(830, 560);
+            this.Controls.Add(this.cmbCurrency);
+            this.Controls.Add(this.lblCurrency);
             this.Controls.Add(this.btnApplyHistory);
             this.Controls.Add(this.lstHistory);
             this.Controls.Add(this.lblHistory);
@@ -305,6 +333,8 @@
         
         private System.Windows.Forms.Label lblTotalHousePrice;
         private System.Windows.Forms.TextBox txtTotalHousePrice;
+        private System.Windows.Forms.Label lblCurrency;
+        private System.Windows.Forms.ComboBox cmbCurrency;
         private System.Windows.Forms.Label lblDownPaymentType;
         private System.Windows.Forms.ComboBox cmbDownPaymentType;
         private System.Windows.Forms.TextBox txtDownPayment;
