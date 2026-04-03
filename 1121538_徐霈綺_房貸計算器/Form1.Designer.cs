@@ -48,6 +48,9 @@
             this.lblTotalInterest = new System.Windows.Forms.Label();
             this.lblTotalRepayment = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
+            this.lblHistory = new System.Windows.Forms.Label();
+            this.lstHistory = new System.Windows.Forms.ListBox();
+            this.btnApplyHistory = new System.Windows.Forms.Button();
             this.groupBoxResult.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -236,12 +239,44 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.BtnReset_Click);
             // 
+            // lblHistory
+            // 
+            this.lblHistory.AutoSize = true;
+            this.lblHistory.Location = new System.Drawing.Point(520, 30);
+            this.lblHistory.Name = "lblHistory";
+            this.lblHistory.Size = new System.Drawing.Size(67, 15);
+            this.lblHistory.TabIndex = 15;
+            this.lblHistory.Text = "歷史紀錄:";
+            // 
+            // lstHistory
+            // 
+            this.lstHistory.FormattingEnabled = true;
+            this.lstHistory.ItemHeight = 15;
+            this.lstHistory.Location = new System.Drawing.Point(520, 50);
+            this.lstHistory.Name = "lstHistory";
+            this.lstHistory.Size = new System.Drawing.Size(280, 424);
+            this.lstHistory.TabIndex = 16;
+            this.lstHistory.DoubleClick += new System.EventHandler(this.BtnApplyHistory_Click);
+            // 
+            // btnApplyHistory
+            // 
+            this.btnApplyHistory.Location = new System.Drawing.Point(520, 490);
+            this.btnApplyHistory.Name = "btnApplyHistory";
+            this.btnApplyHistory.Size = new System.Drawing.Size(280, 40);
+            this.btnApplyHistory.TabIndex = 17;
+            this.btnApplyHistory.Text = "套用選取紀錄";
+            this.btnApplyHistory.UseVisualStyleBackColor = true;
+            this.btnApplyHistory.Click += new System.EventHandler(this.BtnApplyHistory_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnCalculate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(530, 560);
+            this.ClientSize = new System.Drawing.Size(830, 560);
+            this.Controls.Add(this.btnApplyHistory);
+            this.Controls.Add(this.lstHistory);
+            this.Controls.Add(this.lblHistory);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.groupBoxResult);
@@ -288,6 +323,9 @@
         private System.Windows.Forms.Label lblTotalRepayment;
         private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Label lblHistory;
+        private System.Windows.Forms.ListBox lstHistory;
+        private System.Windows.Forms.Button btnApplyHistory;
     }
 }
 

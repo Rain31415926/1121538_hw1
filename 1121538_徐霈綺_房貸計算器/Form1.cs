@@ -138,6 +138,35 @@ namespace _1121538_徐霈綺_房貸計算器
             lblFirstMonthDetails.Text = $"首期利息: {firstMonthInterest:N2} 元 / 首期本金: {firstMonthPrincipal:N2} 元";
             lblTotalInterest.Text = $"總利息支出: {totalInterest:N2} 元";
             lblTotalRepayment.Text = $"總還款金額: {totalRepayment:N2} 元";
+
+            // 加入至歷史紀錄
+            var record = new CalculationRecord
+            {
+                TotalHousePrice = _totalHousePriceRaw,
+                DownPaymentType = cmbDownPaymentType.SelectedIndex,
+                DownPayment = downPaymentVal,
+                AnnualRate = annualRate,
+                LoanTerm = loanTermYears,
+                GracePeriod = gracePeriodYears
+            };
+            lstHistory.Items.Add(record);
+        }
+
+        private void BtnApplyHistory_Click(object sender, EventArgs e)
+        {
+            if (lstHistory.SelectedItem is CalculationRecord record)
+            {
+                txtTotalHousePrice.Text = record.TotalHousePrice.ToString();
+                cmbDownPaymentType.SelectedIndex = record.DownPaymentType;
+                txtDownPayment.Text = record.DownPayment.ToString();
+                txtAnnualInterestRate.Text = record.AnnualRate.ToString();
+                txtLoanTerm.Text = record.LoanTerm.ToString();
+                txtGracePeriod.Text = record.GracePeriod.ToString();
+            }
+            else
+            {
+                MessageBox.Show("請先選擇一筆歷史紀錄。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void BtnHelp_Click(object sender, EventArgs e)
@@ -166,6 +195,22 @@ namespace _1121538_徐霈綺_房貸計算器
             lblFirstMonthDetails.Text = "首期利息與本金:";
             lblTotalInterest.Text = "總利息支出:";
             lblTotalRepayment.Text = "總還款金額:";
+        }
+
+        private class CalculationRecord
+        {
+            public double TotalHousePrice { get; set; }
+            public int DownPaymentType { get; set; }
+            public double DownPayment { get; set; }
+            public double AnnualRate { get; set; }
+            public int LoanTerm { get; set; }
+            public int GracePeriod { get; set; }
+
+            public override string ToString()
+            {
+                string typeStr = DownPaymentType == 0 ? "%" : "元";
+                return $"總價:{TotalHousePrice}萬, 自備:{DownPayment}{typeStr}, 利率:{AnnualRate}%, {LoanTerm}年";
+            }
         }
     }
 }
