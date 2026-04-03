@@ -57,7 +57,7 @@
             this.lblTotalHousePrice.Name = "lblTotalHousePrice";
             this.lblTotalHousePrice.Size = new System.Drawing.Size(120, 15);
             this.lblTotalHousePrice.TabIndex = 0;
-            this.lblTotalHousePrice.Text = "房屋總價 (萬元):";
+            this.lblTotalHousePrice.Text = "房屋總價 (萬元)(&P):";
 
             // txtTotalHousePrice
             this.txtTotalHousePrice.Location = new System.Drawing.Point(180, 27);
@@ -71,7 +71,7 @@
             this.lblDownPaymentType.Name = "lblDownPaymentType";
             this.lblDownPaymentType.Size = new System.Drawing.Size(120, 15);
             this.lblDownPaymentType.TabIndex = 2;
-            this.lblDownPaymentType.Text = "自備款方式:";
+            this.lblDownPaymentType.Text = "自備款方式(&D):";
 
             // cmbDownPaymentType
             this.cmbDownPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -96,7 +96,7 @@
             this.lblAnnualInterestRate.Name = "lblAnnualInterestRate";
             this.lblAnnualInterestRate.Size = new System.Drawing.Size(120, 15);
             this.lblAnnualInterestRate.TabIndex = 5;
-            this.lblAnnualInterestRate.Text = "貸款年利率 (%):";
+            this.lblAnnualInterestRate.Text = "貸款年利率 (%)(&R):";
 
             // txtAnnualInterestRate
             this.txtAnnualInterestRate.Location = new System.Drawing.Point(180, 107);
@@ -111,7 +111,7 @@
             this.lblLoanTerm.Name = "lblLoanTerm";
             this.lblLoanTerm.Size = new System.Drawing.Size(120, 15);
             this.lblLoanTerm.TabIndex = 7;
-            this.lblLoanTerm.Text = "貸款年限 (年):";
+            this.lblLoanTerm.Text = "貸款年限 (年)(&T):";
 
             // txtLoanTerm
             this.txtLoanTerm.Location = new System.Drawing.Point(180, 147);
@@ -126,7 +126,7 @@
             this.lblGracePeriod.Name = "lblGracePeriod";
             this.lblGracePeriod.Size = new System.Drawing.Size(120, 15);
             this.lblGracePeriod.TabIndex = 9;
-            this.lblGracePeriod.Text = "寬限期 (年, 選填):";
+            this.lblGracePeriod.Text = "寬限期 (年, 選填)(&G):";
 
             // txtGracePeriod
             this.txtGracePeriod.Location = new System.Drawing.Point(180, 187);
@@ -140,7 +140,7 @@
             this.btnCalculate.Name = "btnCalculate";
             this.btnCalculate.Size = new System.Drawing.Size(150, 40);
             this.btnCalculate.TabIndex = 11;
-            this.btnCalculate.Text = "計算";
+            this.btnCalculate.Text = "計算(&C)";
             this.btnCalculate.UseVisualStyleBackColor = true;
             this.btnCalculate.Click += new System.EventHandler(this.BtnCalculate_Click);
 
@@ -198,6 +198,7 @@
             this.lblTotalRepayment.Text = "總還款金額:";
 
             // Form1
+            this.AcceptButton = this.btnCalculate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(530, 560);
