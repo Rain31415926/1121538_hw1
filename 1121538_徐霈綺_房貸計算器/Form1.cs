@@ -150,5 +150,21 @@ namespace _1121538_徐霈綺_房貸計算器
                                  "貸款總金額: 房屋總價扣除自備款後的實際貸款金額。";
             MessageBox.Show(helpMessage, "註解", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void BtnReset_Click(object sender, EventArgs e)
+        {
+            txtTotalHousePrice.Text = "";
+            cmbDownPaymentType.SelectedIndex = 0;
+            txtDownPayment.Text = "20";
+            txtAnnualInterestRate.Text = "2.15";
+            txtLoanTerm.Text = "30";
+            txtGracePeriod.Text = "0";
+
+            lblTotalLoanAmount.Text = "貸款總金額:";
+            lblMonthlyPayment.Text = "每月應繳金額:";
+            lblFirstMonthDetails.Text = "首期利息與本金:";
+            lblTotalInterest.Text = "總利息支出:";
+            lblTotalRepayment.Text = "總還款金額:";
+        }
     }
 }
