@@ -19,27 +19,35 @@ namespace _1121538_徐霈綺_房貸計算器
             cmbCurrency.SelectedIndex = 0; // 預設新台幣
 
             // 美化設定
-            this.Font = new Font("微軟正黑體", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(136)));
+            this.Font = new Font("微軟正黑體", 12F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(136)));
             this.BackColor = Color.FromArgb(240, 244, 248);
 
-            btnCalculate.BackColor = Color.FromArgb(0, 120, 215);
-            btnCalculate.ForeColor = Color.White;
-            btnCalculate.FlatStyle = FlatStyle.Flat;
-            btnCalculate.FlatAppearance.BorderSize = 0;
-
-            btnReset.BackColor = Color.White;
-            btnReset.FlatStyle = FlatStyle.Flat;
-            btnReset.FlatAppearance.BorderColor = Color.LightGray;
-
-            btnHelp.BackColor = Color.White;
-            btnHelp.FlatStyle = FlatStyle.Flat;
-            btnHelp.FlatAppearance.BorderColor = Color.LightGray;
-
-            btnApplyHistory.BackColor = Color.White;
-            btnApplyHistory.FlatStyle = FlatStyle.Flat;
-            btnApplyHistory.FlatAppearance.BorderColor = Color.LightGray;
+            // 圓角按鈕設定 Helper (這只是概念展示，若需真實圓角可考慮客製控制項或自繪)
+            SetButtonFlatAndRounded(btnCalculate, Color.FromArgb(0, 120, 215), Color.White);
+            SetButtonFlatAndRounded(btnReset, Color.White, Color.Black);
+            SetButtonFlatAndRounded(btnHelp, Color.White, Color.Black);
+            SetButtonFlatAndRounded(btnApplyHistory, Color.White, Color.Black);
 
             groupBoxResult.BackColor = Color.White;
+        }
+
+        private void SetButtonFlatAndRounded(Button btn, Color backColor, Color foreColor)
+        {
+            btn.BackColor = backColor;
+            btn.ForeColor = foreColor;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 1;
+            btn.FlatAppearance.BorderColor = Color.LightGray;
+
+            // 透過繪製圓角 Path 設定 Region
+            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+            int radius = 10;
+            path.AddArc(0, 0, radius, radius, 180, 90);
+            path.AddArc(btn.Width - radius, 0, radius, radius, 270, 90);
+            path.AddArc(btn.Width - radius, btn.Height - radius, radius, radius, 0, 90);
+            path.AddArc(0, btn.Height - radius, radius, radius, 90, 90);
+            path.CloseFigure();
+            btn.Region = new Region(path);
         }
 
         private void BtnCalculate_Click(object sender, EventArgs e)
