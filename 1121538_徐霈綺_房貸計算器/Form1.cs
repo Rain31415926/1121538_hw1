@@ -12,6 +12,10 @@ namespace _1121538_徐霈綺_房貸計算器
 {
     public partial class Form1 : Form
     {
+        private Rectangle originalFormRect;
+        private Dictionary<Control, Rectangle> originalControlRects = new Dictionary<Control, Rectangle>();
+        private Dictionary<Control, float> originalControlFonts = new Dictionary<Control, float>();
+
         public Form1()
         {
             InitializeComponent();
@@ -29,6 +33,82 @@ namespace _1121538_徐霈綺_房貸計算器
             SetButtonFlatAndRounded(btnApplyHistory, Color.White, Color.Black);
 
             groupBoxResult.BackColor = Color.White;
+
+            this.Load += Form1_Load;
+            this.Resize += Form1_Resize;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            originalFormRect = new Rectangle(this.Location.X, this.Location.Y, this.Width, this.Height);
+            SaveOriginalBounds(this.Controls);
+        }
+
+        private void SaveOriginalBounds(Control.ControlCollection controls)
+        {
+            foreach (Control c in controls)
+            {
+                originalControlRects.Add(c, new Rectangle(c.Location.X, c.Location.Y, c.Width, c.Height));
+                originalControlFonts.Add(c, c.Font.Size);
+                if (c.HasChildren)
+                {
+                    SaveOriginalBounds(c.Controls);
+                }
+            }
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (originalFormRect.Width == 0 || originalFormRect.Height == 0) return;
+
+            float xRatio = (float)this.Width / (float)originalFormRect.Width;
+            float yRatio = (float)this.Height / (float)originalFormRect.Height;
+
+            // 如果要維持長寬等比例縮放，取最小值
+            float ratio = Math.Min(xRatio, yRatio);
+
+            ResizeControls(this.Controls, ratio);
+        }
+
+        private void ResizeControls(Control.ControlCollection controls, float ratio)
+        {
+            foreach (Control c in controls)
+            {
+                if (originalControlRects.TryGetValue(c, out Rectangle rect))
+                {
+                    c.Left = (int)(rect.X * ratio);
+                    c.Top = (int)(rect.Y * ratio);
+                    c.Width = (int)(rect.Width * ratio);
+                    c.Height = (int)(rect.Height * ratio);
+                }
+
+                if (originalControlFonts.TryGetValue(c, out float fontSize))
+                {
+                    float newSize = fontSize * ratio;
+                    if (newSize > 0)
+                    {
+                        c.Font = new Font(c.Font.FontFamily, newSize, c.Font.Style);
+                    }
+                }
+
+                if (c is Button btn)
+                {
+                    // 重新計算圓角
+                    int radius = Math.Max(1, (int)(10 * ratio));
+                    System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+                    path.AddArc(0, 0, radius * 2, radius * 2, 180, 90);
+                    path.AddArc(btn.Width - radius * 2, 0, radius * 2, radius * 2, 270, 90);
+                    path.AddArc(btn.Width - radius * 2, btn.Height - radius * 2, radius * 2, radius * 2, 0, 90);
+                    path.AddArc(0, btn.Height - radius * 2, radius * 2, radius * 2, 90, 90);
+                    path.CloseFigure();
+                    btn.Region = new Region(path);
+                }
+
+                if (c.HasChildren)
+                {
+                    ResizeControls(c.Controls, ratio);
+                }
+            }
         }
 
         private void SetButtonFlatAndRounded(Button btn, Color backColor, Color foreColor)
