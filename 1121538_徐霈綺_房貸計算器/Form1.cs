@@ -335,7 +335,11 @@ namespace _1121538_徐霈綺_房貸計算器
             public override string ToString()
             {
                 string typeStr = DownPaymentType == 0 ? "%" : "元";
-                return $"總價:{TotalHousePrice}萬, 幣值:{Currency}, 自備:{DownPayment}{typeStr}, 利率:{AnnualRate}%, {LoanTerm}年";
+                if (DownPaymentType == 1)
+                {
+                    return $"總價:{TotalHousePrice:N2}萬, 幣值:{Currency}, 自備:{DownPayment:N2}{typeStr}, 利率:{AnnualRate:N2}%, {LoanTerm}年";
+                }
+                return $"總價:{TotalHousePrice:N2}萬, 幣值:{Currency}, 自備:{DownPayment:N2}{typeStr}, 利率:{AnnualRate:N2}%, {LoanTerm}年";
             }
         }
     }
