@@ -83,15 +83,26 @@
             // 
             // cmbCurrency
             // 
-            this.cmbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             this.cmbCurrency.FormattingEnabled = true;
             this.cmbCurrency.Items.AddRange(new object[] {
-            "新台幣 (TWD)",
-            "美元 (USD)",
-            "日圓 (JPY)",
-            "歐元 (EUR)",
-            "人民幣 (CNY)"});
-            this.cmbCurrency.Location = new System.Drawing.Point(391, 27);
+            "新台幣",
+            "人民幣",
+            "美金",
+            "日幣",
+            "韓元",
+            "歐元",
+            "英鎊",
+            "澳幣",
+            "加幣",
+            "瑞士法郎",
+            "港元",
+            "新加坡元",
+            "泰銖",
+            "馬來幣",
+            "印尼盾",
+            "菲律賓比索"});
+            this.cmbCurrency.Location = new System.Drawing.Point(390, 27);
             this.cmbCurrency.Name = "cmbCurrency";
             this.cmbCurrency.Size = new System.Drawing.Size(90, 23);
             this.cmbCurrency.TabIndex = 19;

@@ -17,6 +17,29 @@ namespace _1121538_徐霈綺_房貸計算器
             InitializeComponent();
             cmbDownPaymentType.SelectedIndex = 0;
             cmbCurrency.SelectedIndex = 0; // 預設新台幣
+
+            // 美化設定
+            this.Font = new Font("微軟正黑體", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(136)));
+            this.BackColor = Color.FromArgb(240, 244, 248);
+
+            btnCalculate.BackColor = Color.FromArgb(0, 120, 215);
+            btnCalculate.ForeColor = Color.White;
+            btnCalculate.FlatStyle = FlatStyle.Flat;
+            btnCalculate.FlatAppearance.BorderSize = 0;
+
+            btnReset.BackColor = Color.White;
+            btnReset.FlatStyle = FlatStyle.Flat;
+            btnReset.FlatAppearance.BorderColor = Color.LightGray;
+
+            btnHelp.BackColor = Color.White;
+            btnHelp.FlatStyle = FlatStyle.Flat;
+            btnHelp.FlatAppearance.BorderColor = Color.LightGray;
+
+            btnApplyHistory.BackColor = Color.White;
+            btnApplyHistory.FlatStyle = FlatStyle.Flat;
+            btnApplyHistory.FlatAppearance.BorderColor = Color.LightGray;
+
+            groupBoxResult.BackColor = Color.White;
         }
 
         private void BtnCalculate_Click(object sender, EventArgs e)
@@ -119,6 +142,12 @@ namespace _1121538_徐霈綺_房貸計算器
             double firstMonthPrincipal = 0;
 
             string currencyStr = cmbCurrency.Text;
+            if (string.IsNullOrWhiteSpace(currencyStr))
+            {
+                MessageBox.Show("請選擇或輸入幣值。", "輸入錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cmbCurrency.Focus();
+                return;
+            }
 
             if (graceMonths > 0)
             {
@@ -162,7 +191,9 @@ namespace _1121538_徐霈綺_房貸計算器
             {
                 txtTotalHousePrice.Text = record.TotalHousePrice.ToString();
                 cmbDownPaymentType.SelectedIndex = record.DownPaymentType;
+
                 cmbCurrency.Text = record.Currency;
+
                 txtDownPayment.Text = record.DownPayment.ToString();
                 txtAnnualInterestRate.Text = record.AnnualRate.ToString();
                 txtLoanTerm.Text = record.LoanTerm.ToString();
